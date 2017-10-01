@@ -1,0 +1,24 @@
+header
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container
+      a.navbar-brand href='#' Seiseki
+      button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar' aria-controls='navbar' aria-expanded='false'
+        span.navbar-toggler-icon
+      #navbar.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item.active
+            = link_to 'ホーム', root_path, class: 'nav-link'
+        ul.navbar-nav.ml-auto
+          - if false
+            li.nav-item.dropdown
+              a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenu' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'
+                span こんにちは
+              div class='dropdown-menu' aria-labelledby='navbarDropdownMenu'
+                = link_to 'リンク', '#', class: 'dropdown-item'
+                = link_to 'ログアウト', '#', class: 'dropdown-item'
+          - else
+            li.nav-item
+              = link_to '先生ログイン', '#', class: 'nav-link'
+            li.nav-item
+              = link_to '学生ログイン', '#', class: 'nav-link'
+
