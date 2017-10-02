@@ -1,0 +1,47 @@
+- if controller.action_name == 'new'
+  - title = '新しい教員を追加'
+- else
+  - title = '教員情報を編集'
+
+.modal-dialog
+  .modal-content
+    .modal-header
+      h4.modal-title.text-primary = title
+    .modal-body
+      = form_for @teacher, remote: true, authenticity_token: true do |f|
+        ul.errors
+        .form-group
+          = f.label :name, '名前'
+          = f.text_field :name, autofocus: true, class: 'form-control'
+        .form-group
+          = f.label :code, '教員番号'
+          = f.text_field :code, class: 'form-control'
+        .form-group
+          = f.label :image, '写真'
+          = f.file_field :image
+        .form-group
+          = f.label :department, '学科'
+          = f.select :department, ['管理', '情報メディア学科', '児童教育学科', '初等教育学専攻'], prompt: '選択してください'
+        - if controller.action_name == 'edit'
+          .form-group
+            = f.label :status, '状態'
+            br
+            = f.radio_button :status, '在職中'
+            = f.label :status, '在職中', value: '在職中'
+            br
+            = f.radio_button :status, '退職済み'
+            = f.label :status, '退職済み', value: '退職済み'
+        .form-group
+          = f.label :password, 'パスワード'
+          = f.password_field :password, class: 'form-control'
+        .form-group
+          = f.label :password_confirmation, 'パスワード確認'
+          = f.password_field :password_confirmation, class: 'form-control'
+        .form-action
+          = f.button type: :submit, class: 'btn btn-success' do
+            = fa_icon('save', text: '保存する')
+          = f.button type: :reset, class: 'btn btn-outline-primary' do
+            = fa_icon('eraser', text: 'リセット')
+    .modal-footer
+      button type='button' class='btn btn-sm btn-default' data-dismiss='modal'
+        = fa_icon('remove', text: '閉じる')

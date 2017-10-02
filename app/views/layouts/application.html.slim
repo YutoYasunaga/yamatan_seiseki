@@ -5,8 +5,13 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = favicon_link_tag 'favicon.ico'
   body
     = render 'layouts/header'
-    .container
+    main.container
+      - flash.each do |key, value|
+        div class="alert alert-#{key}"
+          button type='button' class='close' data-dismiss='alert' &times;
+          = value
       = yield
     = render 'layouts/footer'

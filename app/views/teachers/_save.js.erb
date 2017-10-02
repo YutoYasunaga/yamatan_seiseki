@@ -1,0 +1,6 @@
+<% if @teacher.errors.any? %>
+  $('ul.errors').html('')
+  <% @teacher.errors.full_messages.each do |message| %>
+    $('ul.errors').append($('<li>').html('<%= message %>'))
+  <% end %>
+<% end %>

@@ -1,0 +1,42 @@
+- if current_teacher
+  .row
+    .col-xs-12.col-sm-4.col-md-3
+      .card.button-card
+        = link_to teachers_path do
+          .card-body
+            = image_tag 'buttons/manager_teacher.png'
+          .card-footer
+            b 教員管理
+    .col-xs-12.col-sm-4.col-md-3
+      .card.button-card
+        = link_to '#' do
+          .card-body
+            = image_tag 'buttons/manager_student.png'
+          .card-footer
+            b 学生管理
+    .col-xs-12.col-sm-4.col-md-3
+      .card.button-card
+        = link_to '#' do
+          .card-body
+            = image_tag 'buttons/manager_subject.png'
+          .card-footer
+            b 科目管理
+- else
+  .row#shool-logo
+    .col-xs-12.mx-auto
+      = image_tag('school_logo.png')
+  .row
+    .col-xs-12.col-sm-4.col-md-3.ml-auto
+      .card.button-card
+        = link_to sign_in_path(role: 'teacher') do
+          .card-body
+            = image_tag 'buttons/login_teacher.png'
+          .card-footer
+            b 先生ログイン
+    .col-xs-12.col-sm-4.col-md-3.mr-auto
+      .card.button-card
+        = link_to sign_in_path(role: 'student') do
+          .card-body
+            = image_tag 'buttons/login_student.png'
+          .card-footer
+            b 学生ログイン

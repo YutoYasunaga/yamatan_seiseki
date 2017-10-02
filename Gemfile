@@ -10,6 +10,10 @@ gem 'rails', '~> 5.0.5'
 
 gem 'slim-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
+gem 'font-awesome-rails'
+gem 'bcrypt'
+gem 'paperclip'
+gem 'fog'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'

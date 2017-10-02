@@ -1,0 +1,25 @@
+- if params[:role] == 'teacher'
+  - title = '先生ログイン'
+  - code_text = '教員番号'
+  - button_type = 'danger'
+- else
+  - title = '学生ログイン'
+  - code_text = '学籍番号'
+  - button_type = 'success'
+
+.row
+  .col-xs-12.col-sm-6.col-md-4.mx-auto
+    .card
+      h4.card-header = title
+      .card-body
+        = form_tag sign_in_path do
+          = hidden_field_tag :role, params[:role]
+          .form-group
+            = label_tag :code, code_text
+            = text_field_tag :code, nil, class: 'form-control', autofocus: true
+          .form-group
+            = label_tag :password, 'パスワード'
+            = password_field_tag :password, nil, class: 'form-control'
+          .form-action
+            = button_tag type: :submit, class: "btn btn-#{button_type}" do
+              = fa_icon('sign-in', text: 'ログイン')
