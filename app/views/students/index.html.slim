@@ -1,0 +1,44 @@
+h1.text-primary
+  = fa_icon('graduation-cap', text: '学生管理')
+= link_to new_student_path, remote: true, class: 'btn btn-success' do
+  = fa_icon('user-plus', text: '学生を追加')
+
+.card.search-form
+  .card-body
+    = search_form_for @q do |f|
+      = f.label :name_cont, '名前'
+      = f.search_field :name_cont
+      = f.label :code_cont, '学籍番号'
+      = f.search_field :code_cont
+      = f.label :department_cont, '学科'
+      = f.select :department_cont, ['情報メディア学科', '児童教育学科', '初等教育学専攻'], include_blank: true
+      = f.label :enter_school_year_eq, '入学年'
+      = f.select :enter_school_year_eq, 1980..(Time.now.year), include_blank: true, required: true
+      = f.label :status_cont, '状況'
+      = f.select :status_cont, ['在学中', '卒業すみ', '退学すみ'], include_blank: true
+      br
+      = f.submit '検索', class: 'btn btn-primary'
+
+- if @students.present?
+  .student-index
+    b 数：#{@students.count}
+    .row
+      - @students.each do |student|
+        .col-xs-12.col-sm-6.col-md-4
+          .card
+            h5.card-header 学籍番号：#{student.code}
+            .row.card-body
+              .col-md-6
+                = image_tag student.image.url
+              .col-md-6
+                h4 = student.name
+                p = student.department
+                p #{student.enter_school_year}年に入学
+                - if student.status == '卒業すみ'
+                  .badge.badge-success 卒業すみ
+                - elsif student.status == '退学すみ'
+                  .badge.badge-warning 退学すみ
+              .ml-auto
+                = link_to edit_student_path(student), remote: true, class: 'btn btn-outline-warning' do
+                  = fa_icon('edit', text: '情報編集')
+#student-modal.modal.fade

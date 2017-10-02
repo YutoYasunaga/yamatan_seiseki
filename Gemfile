@@ -14,6 +14,8 @@ gem 'font-awesome-rails'
 gem 'bcrypt'
 gem 'paperclip'
 gem 'fog'
+gem 'faker_japanese'
+gem 'ransack'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'

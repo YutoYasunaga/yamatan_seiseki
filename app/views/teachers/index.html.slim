@@ -3,20 +3,21 @@ h1.text-primary
 = link_to new_teacher_path, remote: true, class: 'btn btn-success' do
   = fa_icon('user-plus', text: '教員を追加')
 
-.row.teacher-index
-  - @teachers.each do |teacher|
-    .col-xs-12.col-sm-6.col-md-4
-      .card
-        h5.card-header 教員番号：#{teacher.code}
-        .row.card-body
-          .col-md-6
-            = image_tag teacher.image.url
-          .col-md-6
-            h4 = teacher.name
-            p = teacher.department
-            - if teacher.status == '退職済み'
-              b.text-danger 退職済み
-        .card-footer
-          = link_to edit_teacher_path(teacher), remote: true, class: 'btn btn-warning' do
-            = fa_icon('edit', text: '情報編集')
+.teacher-index
+  .row
+    - @teachers.each do |teacher|
+      .col-xs-12.col-sm-6.col-md-4
+        .card
+          h5.card-header 教員番号：#{teacher.code}
+          .row.card-body
+            .col-md-6
+              = image_tag teacher.image.url
+            .col-md-6
+              h4 = teacher.name
+              p = teacher.department
+              - if teacher.status == '退職済み'
+                .badge.badge-danger 退職済み
+            .ml-auto
+              = link_to edit_teacher_path(teacher), remote: true, class: 'btn btn-outline-warning' do
+                = fa_icon('edit', text: '情報編集')
 #teacher-modal.modal.fade
