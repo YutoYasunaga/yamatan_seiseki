@@ -13,7 +13,7 @@ h1.text-primary
       = f.label :department_cont, '学科'
       = f.select :department_cont, ['情報メディア学科', '児童教育学科', '初等教育学専攻'], include_blank: true
       = f.label :enter_school_year_eq, '入学年'
-      = f.select :enter_school_year_eq, 1980..(Time.now.year), include_blank: true, required: true
+      = f.select :enter_school_year_eq, 1980..(Time.now.year), selected: Time.now.year
       = f.label :status_cont, '状況'
       = f.select :status_cont, ['在学中', '卒業すみ', '退学すみ'], include_blank: true
       br
