@@ -16,7 +16,7 @@ header
               div class='dropdown-menu' aria-labelledby='navbarDropdownMenu'
                 = link_to '教員管理', teachers_path, class: 'dropdown-item'
                 = link_to '学生管理', students_path, class: 'dropdown-item'
-                = link_to '科目管理', '#', class: 'dropdown-item'
+                = link_to '科目管理', subjects_path, class: 'dropdown-item'
                 = link_to 'ログアウト', sign_out_path, class: 'dropdown-item'
           - else
             li.nav-item

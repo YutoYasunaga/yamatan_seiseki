@@ -21,10 +21,10 @@
           = f.file_field :image
         .form-group
           = f.label :department, '学科'
-          = f.select :department, ['情報メディア学科', '児童教育学科', '初等教育学専攻'], prompt: '選択してください'
+          = f.select :department, Student::DEPARTMENTS, prompt: '選択してください'
         .form-group
           = f.label :enter_school_year, '入学年'
-          = f.number_field :enter_school_year, class: 'form-control'
+          = f.select :enter_school_year, (1980..(Time.now.year)).to_a.reverse
         - if controller.action_name == 'edit'
           .form-group
             = f.label :status, '状況'

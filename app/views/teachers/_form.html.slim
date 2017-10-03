@@ -21,7 +21,7 @@
           = f.file_field :image
         .form-group
           = f.label :department, '学科'
-          = f.select :department, ['管理', '情報メディア学科', '児童教育学科', '初等教育学専攻'], prompt: '選択してください'
+          = f.select :department, Teacher::DEPARTMENTS, prompt: '選択してください'
         - if controller.action_name == 'edit'
           .form-group
             = f.label :status, '状態'

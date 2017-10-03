@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
   def index
     @q = Student.ransack(params[:q])
     if params[:q] == nil
-      @students = nil
+      @students = Student.where(enter_school_year: Time.now.year)
     else
       @students = @q.result(distinct: true)
     end
@@ -39,6 +39,6 @@ class StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:student).permit(:name, :code, :department, :image, :status, :enter_shool_year, :password, :password_confirmation)
+    params.require(:student).permit(:name, :code, :department, :image, :status, :enter_school_year, :password, :password_confirmation)
   end
 end

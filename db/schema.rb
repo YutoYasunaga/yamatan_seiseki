@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002110807) do
+ActiveRecord::Schema.define(version: 20171002141849) do
 
   create_table "students", force: :cascade do |t|
     t.string   "name"
@@ -25,6 +25,19 @@ ActiveRecord::Schema.define(version: 20171002110807) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "enter_school_year"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "credit"
+    t.string   "division"
+    t.string   "section"
+    t.string   "department"
+    t.integer  "teacher_id"
+    t.string   "status",     default: "実行中"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["teacher_id"], name: "index_subjects_on_teacher_id"
   end
 
   create_table "teachers", force: :cascade do |t|

@@ -1,0 +1,28 @@
+h1.text-primary
+  = fa_icon('book', text: '科目管理')
+= link_to new_subject_path, remote: true, class: 'btn btn-success' do
+  = fa_icon('plus-square', text: '科目を追加')
+
+.subject-index
+  h3.text-success 実行中
+  table.table.table-striped
+    thead
+      th 科目名
+      th 単位
+      th 学科
+      th 区分
+      th 卒業認定
+    tbody
+      = render @subjects
+
+  h3.text-danger 停止済み
+  table.table.table-striped
+    thead
+      th 科目名
+      th 単位
+      th 学科
+      th 区分
+      th 卒業認定
+    tbody
+      = render @deleted_subjects
+#subject-modal.modal.fade
