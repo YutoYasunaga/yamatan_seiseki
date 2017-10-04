@@ -15,7 +15,7 @@ h1.text-primary
       = f.label :enter_school_year_eq, '入学年'
       = f.select :enter_school_year_eq, (1980..(Time.now.year)).to_a.reverse
       = f.label :status_cont, '状況'
-      = f.select :status_cont, ['在学中', '卒業すみ', '退学すみ'], include_blank: true
+      = f.select :status_cont, ['在学中', '卒業済み', '退学済み'], include_blank: true
       br
       = f.submit '検索', class: 'btn btn-primary'
 

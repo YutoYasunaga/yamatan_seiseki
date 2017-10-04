@@ -16,6 +16,7 @@ gem 'paperclip'
 gem 'fog'
 gem 'faker_japanese'
 gem 'ransack'
+gem 'figaro'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'

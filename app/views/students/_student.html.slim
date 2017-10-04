@@ -8,10 +8,10 @@
         h6 = student.name
         p = student.department
         p #{student.enter_school_year}年に入学
-        - if student.status == '卒業すみ'
-          .badge.badge-success 卒業すみ
-        - elsif student.status == '退学すみ'
-          .badge.badge-warning 退学すみ
+        - if student.status == '卒業済み'
+          .badge.badge-success = student.status
+        - elsif student.status == '退学済み'
+          .badge.badge-warning = student.status
       - if current_teacher && current_teacher.admin?
         .ml-auto
           - if controller.action_name == 'index'

@@ -75,6 +75,8 @@ GEM
     faker_japanese (0.2.3)
       faker
     ffi (1.9.18)
+    figaro (1.1.1)
+      thor (~> 0.14)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (1.40.0)
@@ -394,6 +396,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   faker_japanese
+  figaro
   fog
   font-awesome-rails
   guard-livereload

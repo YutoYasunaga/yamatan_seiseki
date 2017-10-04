@@ -20,3 +20,6 @@
 # Ignore Byebug command history file.
 .byebug_history
 /public/images
+
+# Ignore application configuration
+/config/application.yml

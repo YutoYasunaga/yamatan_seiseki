@@ -6,18 +6,31 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-=begin
-100.times do |i|
-  Student.create(
+
+10.times do |i|
+  Teacher.create(
     name: Faker::Name.name,
-    code: "2820#{'%02d' % i}",
-    department: ['情報メディア学科', '児童教育学科', '初等教育学専攻'].sample,
-    enter_school_year: [2014, 2015, 2016].sample,
+    code: "99#{i}",
+    department: Teacher::DEPARTMENTS.sample,
+    status: ['在職中', '退職済み'].sample,
     password: 'yamatan',
     password_confirmation: 'yamatan'
   )
 end
-=end
+
+[2014, 2015, 2016, 2017].each do |year|
+  100.times do |i|
+    Student.create(
+      name: Faker::Name.name,
+      code: "#{year-1988}50#{'%02d' % i}",
+      department: Student::DEPARTMENTS.sample,
+      enter_school_year: year,
+      status: ['在学中', '卒業済み', '退学済み'].sample,
+      password: 'yamatan',
+      password_confirmation: 'yamatan'
+    )
+  end
+end
 
 Subject.create(
   name: '学問と人間の探求',
@@ -404,7 +417,7 @@ Subject.create(
 )
 
 Subject.create(
-  name: '画像処理ー',
+  name: '画像処理',
   credit: 2,
   division: '専門',
   section: '選択',
