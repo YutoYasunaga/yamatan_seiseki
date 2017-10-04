@@ -1,0 +1,17 @@
+tr.result
+  td.required
+    - if study.subject.section == '必修'
+      span ◯
+  td = study.subject.name
+  td.credit = study.subject.credit
+  td.result-text
+    - if study.status == '受講中'
+      span 受講中
+    - else
+      - if study.result == '不可'
+        .badge.badge-danger = study.result
+      - else
+        .badge.badge-success = study.result
+  - if current_teacher && current_teacher.admin?
+    td = link_to '成績編集', edit_study_path(study, student_id: study.student.id), remote: true
+

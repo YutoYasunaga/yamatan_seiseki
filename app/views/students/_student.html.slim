@@ -1,0 +1,22 @@
+.col-xs-12.col-sm-12.col-md-4
+  .card.student
+    h5.card-header 学籍番号：#{student.code}
+    .row.card-body
+      .col-sm-5
+        = image_tag student.image.url
+      .col-sm-7
+        h6 = student.name
+        p = student.department
+        p #{student.enter_school_year}年に入学
+        - if student.status == '卒業すみ'
+          .badge.badge-success 卒業すみ
+        - elsif student.status == '退学すみ'
+          .badge.badge-warning 退学すみ
+      - if current_teacher && current_teacher.admin?
+        .ml-auto
+          - if controller.action_name == 'index'
+            = link_to view_result_path(code: student.code), class: 'btn btn-outline-success' do
+              = fa_icon('bar-char', text: '成績管理')
+          = link_to edit_student_path(student), remote: true, class: 'btn btn-outline-warning' do
+            = fa_icon('edit', text: '情報編集')
+

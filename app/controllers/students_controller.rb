@@ -32,6 +32,13 @@ class StudentsController < ApplicationController
     end
   end
 
+  def view_result
+    @student = Student.find_by_code(params[:code])
+    @results = Study.where(student_id: @student.id)
+    @basic_results = @results.joins(:subject).where("subjects.division = ?", '基礎').order('section, name')
+    @major_results = @results.joins(:subject).where("subjects.division = ?", '専門').order('section, name')
+  end
+
   private
 
   def set_student

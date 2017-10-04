@@ -1,0 +1,64 @@
+- if @student.department == '情報メディア学科'
+  - total_credit = 66
+  - basic_required_credit = 8
+  - basic_optional_credit = 8
+  - major_required_credit = 20
+  - major_optional_credit = 30
+
+h1.text-primary
+  = fa_icon('star', text: '成績表')
+
+.result-index.row
+  = render @student
+  .col-xs-12.col-sm-12.col-md-8
+    .card
+      h5.card-header
+        = fa_icon 'bar-chart', text: '取得単位'
+      .card-body
+        .progress-text
+          span 合計：
+          b #{@student.total_credit}/#{total_credit}
+        .progress
+          div class='progress-bar progress-bar-striped progress-bar-animated bg-success' role='progressbar' style="width: #{@student.total_credit.to_f/total_credit*100}%"
+        .progress-text
+          span 基礎教育科目・必修：
+          b #{@student.basic_required_credit}/#{basic_required_credit}
+        .progress
+          div class='progress-bar progress-bar-striped progress-bar-animated bg-warning' role='progressbar' style="width: #{@student.basic_required_credit.to_f/basic_required_credit*100}%"
+        .progress-text
+          span 基礎教育科目・選択：
+          b #{@student.basic_optional_credit}/#{basic_optional_credit}
+        .progress
+          div class='progress-bar progress-bar-striped progress-bar-animated bg-primary' role='progressbar' style="width: #{@student.basic_optional_credit.to_f/basic_optional_credit*100}%"
+        .progress-text
+          span 専門教育科目・必修：
+          b #{@student.major_required_credit}/#{major_required_credit}
+        .progress
+          div class='progress-bar progress-bar-striped progress-bar-animated bg-warning' role='progressbar' style="width: #{@student.major_required_credit.to_f/major_required_credit*100}%"
+        .progress-text
+          span 専門教育科目・選択：
+          b #{@student.major_optional_credit}/#{major_optional_credit}
+        .progress
+          div class='progress-bar progress-bar-striped progress-bar-animated bg-primary' role='progressbar' style="width: #{@student.major_optional_credit.to_f/major_optional_credit*100}%"
+
+  - if current_teacher && current_teacher.admin?
+    = link_to new_study_path(student_id: @student.id), remote: true, class: 'btn btn-success' do
+      = fa_icon('plus', text: 'この学生の成績を作成')
+
+  table.table.table-striped
+    thead
+      th.required 必修
+      th 科目名
+      th.credit 単位
+      th.result-text 成績
+    tbody
+      tr
+        th.basic colspan='5' 基礎科目
+      = render @basic_results
+      tr
+        td.division colspan='5'
+      tr
+        th.major colspan='5' 専門科目
+      = render @major_results
+
+#study-modal.modal.fade

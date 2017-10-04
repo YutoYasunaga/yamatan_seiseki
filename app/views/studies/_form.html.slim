@@ -1,0 +1,33 @@
+- if controller.action_name == 'new'
+  - title = '新規成績を作成'
+- else
+  - title = '成績情報を編集'
+
+.modal-dialog
+  .modal-content
+    .modal-header
+      h4.modal-title.text-primary = title
+    .modal-body
+      = form_for @study, remote: true, authenticity_token: true do |f|
+        = f.hidden_field :student_id, value: params[:student_id]
+        ul.errors
+        - unless @study.subject
+          .form-group
+            = f.label :subject_id, '科目'
+            = f.collection_select :subject_id, Subject.all, :id, :name, prompt: '選択してください'
+        .form-group
+          = f.label :status, '状況'
+          = f.select :status, ['受講中', '受講済み'], prompt: '選択してください'
+        .form-group
+          = f.label :score, '点数'
+          = f.number_field :score, class: 'form-control', step: :any
+        .form-action
+          = f.button type: :submit, class: 'btn btn-success' do
+            = fa_icon('save', text: '保存する')
+          - if controller.action_name == 'edit'
+            = link_to study_path(@study, student_id: @student.id), method: :delete, data: { confirm: 'よろしいですか？' }, class: 'btn btn-danger' do
+              = fa_icon('remove', text: '削除する')
+    .modal-footer
+      button type='button' class='btn btn-sm btn-default' data-dismiss='modal'
+        = fa_icon('remove', text: '閉じる')
+
