@@ -1,5 +1,5 @@
 class Student < ApplicationRecord
-  DEPARTMENTS = ['情報メディア学科', '児童教育学科', '初等教育学専攻']
+  DEPARTMENTS = ['情報メディア学科', '初等教育学専攻', '幼児教育学専攻']
 
   has_many :studies
   has_one :registration
