@@ -14,18 +14,12 @@ header
               a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenu' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'
                 span こんにちは#{current_teacher.name}先生
               div class='dropdown-menu' aria-labelledby='navbarDropdownMenu'
-                - if current_teacher.admin?
-                  = link_to '教員管理', teachers_path, class: 'dropdown-item'
-                  = link_to '学生管理', students_path, class: 'dropdown-item'
-                  = link_to '科目管理', subjects_path, class: 'dropdown-item'
-                - else
                 = link_to 'ログアウト', sign_out_path, class: 'dropdown-item'
           - elsif current_student
             li.nav-item.dropdown
               a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenu' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'
                 span こんにちは#{current_student.name}さん
               div class='dropdown-menu' aria-labelledby='navbarDropdownMenu'
-                = link_to 'リンク', '#', class: 'dropdown-item'
                 = link_to 'ログアウト', sign_out_path, class: 'dropdown-item'
 
           - else

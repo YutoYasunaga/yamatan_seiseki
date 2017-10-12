@@ -10,7 +10,7 @@ h1.text-primary
           big = subject.name
           br
         hr
-        = link_to accept_registration_path(id: registration.id), method: :post, class: 'btn btn-success' do
+        = link_to accept_registration_path(id: registration.id), method: :post, class: 'btn btn-success', data: { confirm: '同意しますか？' } do
           = fa_icon('check', text: '同意')
-        = link_to reject_registration_path(id: registration.id), method: :post, class: 'btn btn-danger' do
+        = link_to reject_registration_path(id: registration.id), method: :post, class: 'btn btn-danger', data: { confirm: '不同意ですか？' } do
           = fa_icon('remove', text: '不同意')

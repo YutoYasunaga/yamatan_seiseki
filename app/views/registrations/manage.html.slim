@@ -1,9 +1,25 @@
 h1.text-primary
   = fa_icon('key', text: '履修登録管理')
 
-- if Setting.registration_status == 'on'
-  = link_to change_registration_status_path(status: 'off'), method: :post, class: 'btn btn-lg btn-danger', data: { confirm: 'オフにしますか？' } do
-    = fa_icon('lock', text: 'オフにする')
-- else
-  = link_to change_registration_status_path(status: 'on'), method: :post, class: 'btn btn-lg btn-success', data: { confirm: 'オンにしますか？' } do
-    = fa_icon('unlock', text: 'オンにする')
+.row
+  .col-md-6.mx-auto
+    - if Setting.registration_status == 'on'
+      .alert.alert-secondary
+        span 現在は受け取り中です。
+      .col-sm-6.mx-auto
+        .card.button-card
+          = link_to change_registration_status_path(status: 'off'), method: :post, data: { confirm: 'オフにすると、まだ確認されていない履修登録が全て削除されます。オフにしますか？' }
+            .card-body
+              = image_tag 'buttons/registration_off.png'
+            .card-footer
+              b オフにする
+    - else
+      .alert.alert-secondary
+        span 現在はオフになっています。オンにすると、履修登録の申し込みが出来ます。
+      .col-sm-6.mx-auto
+        .card.button-card
+          = link_to change_registration_status_path(status: 'on'), method: :post, data: { confirm: 'オンにしますか？' }
+            .card-body
+              = image_tag 'buttons/registration_on.png'
+            .card-footer
+              b オンにする

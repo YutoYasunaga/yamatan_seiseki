@@ -48,7 +48,7 @@ class StudiesController < ApplicationController
   end
 
   def update_status
-    if @study.score >= 50
+    if @study.score and @study.score >= 50
       @study.update_attributes(status: '受講済み')
     else
       @study.update_attributes(status: nil)

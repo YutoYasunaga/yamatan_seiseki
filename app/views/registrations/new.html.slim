@@ -11,5 +11,5 @@ h1.text-primary
     = f.label :teacher_id, 'チューター先生'
     = f.collection_select(:teacher_id, @teachers, :id, :name)
   .form-action
-    = f.button type: :submit, class: 'btn btn-success' do
+    = f.button type: :submit, class: 'btn btn-success', data: { confirm: "よろしいですか？" } do
       = fa_icon('send-o', text: '先生に送る')
