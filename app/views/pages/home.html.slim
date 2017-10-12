@@ -44,14 +44,14 @@
               = image_tag 'buttons/teacher_subject.png'
             .card-footer
               b 担当科目
-      - if current_teacher.registrations.any?
+      - if Setting.registration_status == 'on'
         .col-xs-12.col-sm-4.col-md-3
           .card.button-card
             = link_to registrations_path do
               .card-body
                 = image_tag 'buttons/teacher_check_registration.png'
               .card-footer
-                b 履修登録確認
+                b 履修登録確認（#{current_teacher.registrations.count}件）
 
 - elsif current_student
   .row

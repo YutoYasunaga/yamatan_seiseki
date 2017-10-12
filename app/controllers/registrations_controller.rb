@@ -51,14 +51,14 @@ class RegistrationsController < ApplicationController
         )
       end
     end
-    @registration.update_attributes(status: 'OK')
+    @registration.update_attributes(status: 'OK', teacher: nil)
     redirect_to registrations_path
     flash[:success] = "#{@registration.student.name}さんの履修登録が登録されました！"
   end
 
   def reject
     @registration = Registration.find(params[:id])
-    @registration.update_attributes(status: 'NG')
+    @registration.update_attributes(status: 'NG', teacher: nil)
     redirect_to registrations_path
     flash[:warning] = "#{@registration.student.name}さんの履修登録が拒否されました！"
   end
