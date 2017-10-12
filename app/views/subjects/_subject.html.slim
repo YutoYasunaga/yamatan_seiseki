@@ -1,11 +1,15 @@
 tr.subject
   td
     big = subject.name
-    - if subject.teacher.present?
+    - if controller.controller_name == 'subjects'
+      - if subject.teacher.present?
+        br
+        span 担当先生：#{subject.teacher.name}
       br
-      span 担当先生：#{subject.teacher.name}
-    br
-    small = link_to '情報編集', edit_subject_path(subject), remote: true
+      small = link_to '情報編集', edit_subject_path(subject), remote: true
+    - else
+      br
+      = link_to '成績入力', edit_result_path(name: subject.name)
   td = subject.credit
   td = subject.department
   td = subject.division

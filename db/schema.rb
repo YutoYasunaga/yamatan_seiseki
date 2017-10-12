@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171003155113) do
+ActiveRecord::Schema.define(version: 20171011094516) do
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "teacher_id"
+    t.string   "status",     default: "確認待ち"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["student_id"], name: "index_registrations_on_student_id"
+    t.index ["teacher_id"], name: "index_registrations_on_teacher_id"
+  end
+
+  create_table "registrations_subjects", id: false, force: :cascade do |t|
+    t.integer "registration_id", null: false
+    t.integer "subject_id",      null: false
+  end
 
   create_table "students", force: :cascade do |t|
     t.string   "name"

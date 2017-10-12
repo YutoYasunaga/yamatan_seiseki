@@ -1,0 +1,13 @@
+h1.text-primary
+  = fa_icon 'file-text', text: '担当科目'
+
+.subject-index
+  table.table.table-striped
+    thead
+      th 科目名
+      th 単位
+      th 学科
+      th 区分
+      th 卒業認定
+    tbody
+      = render @subjects

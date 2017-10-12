@@ -27,6 +27,11 @@ class TeachersController < ApplicationController
     end
   end
 
+  def view_subject
+    @teacher = Teacher.find_by_code(params[:code])
+    @subjects = Subject.where(teacher: @teacher)
+  end
+
   private
 
   def teacher_params

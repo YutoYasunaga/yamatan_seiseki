@@ -22,15 +22,30 @@
               = image_tag 'buttons/manager_subject.png'
             .card-footer
               b 科目管理
+      .col-xs-12.col-sm-4.col-md-3
+        .card.button-card
+          = link_to subjects_path do
+            .card-body
+              = image_tag 'buttons/manager_registration.png'
+            .card-footer
+              b 履修登録管理
   - else
     .row
       .col-xs-12.col-sm-4.col-md-3
         .card.button-card
-          = link_to teachers_path do
+          = link_to view_subject_path(code: current_teacher.code) do
             .card-body
-              = image_tag 'buttons/manager_teacher.png'
+              = image_tag 'buttons/teacher_subject.png'
             .card-footer
-              b 教員管理
+              b 担当科目
+      - if current_teacher.registrations.any?
+        .col-xs-12.col-sm-4.col-md-3
+          .card.button-card
+            = link_to registrations_path do
+              .card-body
+                = image_tag 'buttons/teacher_check_registration.png'
+              .card-footer
+                b 履修登録確認
 
 - elsif current_student
   .row
@@ -41,6 +56,36 @@
             = image_tag 'buttons/student_result.png'
           .card-footer
             b 成績管理
+    - if true
+      .col-xs-12.col-sm-4.col-md-3
+        - if current_student.registration.nil?
+          .card.button-card
+            = link_to new_registration_path do
+              .card-body
+                = image_tag 'buttons/student_register.png'
+              .card-footer
+                b 履修登録
+        - elsif current_student.registration.status == '確認待ち'
+          .card.button-card
+            = link_to new_registration_path do
+              .card-body
+                = image_tag 'buttons/registration_waiting.png'
+              .card-footer
+                b 履修登録：確認待ち
+        - elsif current_student.registration.status == 'OK'
+          .card.button-card
+            = link_to new_registration_path do
+              .card-body
+                = image_tag 'buttons/registration_accepted.png'
+              .card-footer
+                b 履修登録：OK
+        - else
+          .card.button-card
+            = link_to new_registration_path do
+              .card-body
+                = image_tag 'buttons/registration_rejected.png'
+              .card-footer
+                b 履修登録：NG
 
 - else
   .row#shool-logo

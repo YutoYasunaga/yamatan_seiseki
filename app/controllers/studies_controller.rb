@@ -35,6 +35,11 @@ class StudiesController < ApplicationController
     flash[:success] = "「#{@study.subject.name}」の成績が削除されました！"
   end
 
+  def edit_result
+    @subject = Subject.find_by_name(params[:name])
+    @studies = Study.where(subject: @subject, status: '受講中')
+  end
+
   private
 
   def study_params
