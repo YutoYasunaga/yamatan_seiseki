@@ -17,7 +17,7 @@ footer
   margin-right: 5px
 
 form
-  input[type='radio'], label
+  input[type='radio'], input[type='checkbox'], label
     margin-right: 5px
   .errors
     color: red
@@ -36,18 +36,21 @@ form
 .card
   margin-bottom: 20px
 
-.card.button-card
+.button-card, .normal-card
   margin-bottom: 20px
   a
     &:hover
       text-decoration: none
-  &:hover
-    box-shadow: 5px 5px 5px lightgreen
+  box-shadow: 5px 5px 5px gray
   .card-body
     padding: 5px
   img
     width: 100%
   text-align: center
+
+.button-card
+  &:hover
+    box-shadow: 5px 5px 5px lightgreen
 
 .teacher-index, .student-index
   margin-top: 10px

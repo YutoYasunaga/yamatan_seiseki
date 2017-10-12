@@ -24,11 +24,17 @@
               b 科目管理
       .col-xs-12.col-sm-4.col-md-3
         .card.button-card
-          = link_to subjects_path do
-            .card-body
-              = image_tag 'buttons/manager_registration.png'
-            .card-footer
-              b 履修登録管理
+          = link_to manage_registration_path do
+            - if Setting.registration_status == 'on'
+              .card-body
+                = image_tag 'buttons/registration_on.png'
+              .card-footer
+                b 履修登録：オン
+            - else
+              .card-body
+                = image_tag 'buttons/registration_off.png'
+              .card-footer
+                b 履修登録：オフ
   - else
     .row
       .col-xs-12.col-sm-4.col-md-3
@@ -56,7 +62,7 @@
             = image_tag 'buttons/student_result.png'
           .card-footer
             b 成績管理
-    - if true
+    - if Setting.registration_status == 'on'
       .col-xs-12.col-sm-4.col-md-3
         - if current_student.registration.nil?
           .card.button-card
@@ -73,19 +79,19 @@
               .card-footer
                 b 履修登録：確認待ち
         - elsif current_student.registration.status == 'OK'
-          .card.button-card
-            = link_to new_registration_path do
+          .card.normal-card
+            div
               .card-body
                 = image_tag 'buttons/registration_accepted.png'
               .card-footer
-                b 履修登録：OK
+                b 履修登録：確認済み
         - else
           .card.button-card
             = link_to new_registration_path do
               .card-body
                 = image_tag 'buttons/registration_rejected.png'
               .card-footer
-                b 履修登録：NG
+                b 履修登録：編集が必要
 
 - else
   .row#shool-logo

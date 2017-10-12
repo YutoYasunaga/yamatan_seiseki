@@ -1,4 +1,5 @@
 class StudiesController < ApplicationController
+  after_action :update_status, only: [:create, :update]
 
   def new
     @study = Study.new
@@ -44,5 +45,13 @@ class StudiesController < ApplicationController
 
   def study_params
     params.require(:study).permit(:subject_id, :student_id, :status, :score)
+  end
+
+  def update_status
+    if @study.score >= 50
+      @study.update_attributes(status: '受講済み')
+    else
+      @study.update_attributes(status: nil)
+    end
   end
 end

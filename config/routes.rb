@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/edit_result/:name' => 'studies#edit_result', as: 'edit_result'
   post '/registrations/accept' => 'registrations#accept', as: 'accept_registration'
   post '/registrations/reject' => 'registrations#reject', as: 'reject_registration'
+  get '/registrations/manage' => 'registrations#manage', as: 'manage_registration'
+  post '/settings/change_registration_status/:status' => 'settings#change_registration_status', as: 'change_registration_status'
 
   resources :teachers
   resources :students

@@ -2,9 +2,14 @@ h1.text-primary
   = fa_icon('plus-square', text: '履修登録')
 
 = form_for @registration do |f|
-  = f.collection_check_boxes(:subject_ids, @subjects, :id, :name) do |b|
-    = b.check_box
-    = b.label
-    br
-  = f.collection_select(:teacher_id, @teachers, :id, :name)
-  = f.submit
+  .form-group
+    = f.collection_check_boxes(:subject_ids, @subjects, :id, :name) do |b|
+      = b.check_box
+      big = b.label
+      br
+  .form-group
+    = f.label :teacher_id, 'チューター先生'
+    = f.collection_select(:teacher_id, @teachers, :id, :name)
+  .form-action
+    = f.button type: :submit, class: 'btn btn-success' do
+      = fa_icon('send-o', text: '先生に送る')

@@ -1,0 +1,9 @@
+h1.text-primary
+  = fa_icon('key', text: '履修登録管理')
+
+- if Setting.registration_status == 'on'
+  = link_to change_registration_status_path(status: 'off'), method: :post, class: 'btn btn-lg btn-danger', data: { confirm: 'オフにしますか？' } do
+    = fa_icon('lock', text: 'オフにする')
+- else
+  = link_to change_registration_status_path(status: 'on'), method: :post, class: 'btn btn-lg btn-success', data: { confirm: 'オンにしますか？' } do
+    = fa_icon('unlock', text: 'オンにする')

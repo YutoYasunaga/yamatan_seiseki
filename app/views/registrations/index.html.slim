@@ -1,10 +1,16 @@
 h1.text-primary
   = fa_icon('hourglass-1', text: '確認待ちの履修登録')
+
 - @registrations.each do |registration|
-  p = registration.student.name
-  - registration.subjects.each do |subject|
-    b = subject.name
-  = link_to accept_registration_path(id: registration.id), method: :post, class: 'btn btn-success' do
-    = fa_icon('check', text: '同意')
-  = link_to reject_registration_path(id: registration.id), method: :post, class: 'btn btn-danger' do
-    = fa_icon('remove', text: '不同意')
+  .col-md-6.mx-auto
+    .card
+      h3.card-header.bg-primary.text-white = registration.student.name
+      .card-body
+        - registration.subjects.each do |subject|
+          big = subject.name
+          br
+        hr
+        = link_to accept_registration_path(id: registration.id), method: :post, class: 'btn btn-success' do
+          = fa_icon('check', text: '同意')
+        = link_to reject_registration_path(id: registration.id), method: :post, class: 'btn btn-danger' do
+          = fa_icon('remove', text: '不同意')
