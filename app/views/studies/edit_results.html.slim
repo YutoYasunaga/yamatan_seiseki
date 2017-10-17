@@ -1,7 +1,7 @@
-h1.text-primary
+h3.text-primary
   = fa_icon 'edit', text: "「#{@subject.name}」の成績を編集"
 
-.row
+.edit-results.row
   .col-md-8.mx-auto
     = form_for :study, url: update_results_path, method: :put do
       table.table.table-striped
@@ -15,6 +15,6 @@ h1.text-primary
               tr
                 td = study.student.code
                 td = study.student.name
-                td = f.number_field :score, class: 'form-control'
+                td.score-column = f.number_field :score, class: 'form-control', step: :any
       = button_tag type: :submit,  class: 'btn btn-success'  do
-        span Hello
+        = fa_icon 'calculator', text: '更新する'

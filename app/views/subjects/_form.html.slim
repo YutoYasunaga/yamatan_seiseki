@@ -15,7 +15,7 @@
           = f.text_field :name, autofocus: true, class: 'form-control'
         .form-group
           = f.label :credit, '単位'
-          = f.select :credit, 1..5
+          = f.select :credit, 1..4
         .form-group
           = f.label :department, '学科'
           = f.select :department, Subject::DEPARTMENTS, prompt: '選択してください'

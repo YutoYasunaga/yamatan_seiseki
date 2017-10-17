@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  def admin?
+  def admin_signed_in?
     current_teacher and current_teacher.admin?
   end
 
@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
     @current_student ||= Student.find(session[:student_id]) if session[:student_id]
   end
 
-  helper_method :admin?, :current_teacher, :current_student
+  helper_method :admin_signed_in?, :current_teacher, :current_student
 
 end

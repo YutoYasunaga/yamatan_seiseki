@@ -15,9 +15,16 @@
           .form-group
             = f.label :subject_id, '科目'
             = f.collection_select :subject_id, Subject.all, :id, :name, prompt: '選択してください'
-        .form-group
-          = f.label :status, '状況'
-          = f.select :status, ['受講中', '受講済み', '不可'], prompt: '選択してください'
+        .alert.alert-secondary
+          span 空：受講中
+          br
+          span 80点以上：優
+          br
+          span 70点以上80点以下：良
+          br
+          span 50点以上70点以下：可
+          br
+          span 50点以下：不可
         .form-group
           = f.label :score, '点数'
           = f.number_field :score, class: 'form-control', step: :any

@@ -32,10 +32,27 @@ class TeachersController < ApplicationController
     @subjects = Subject.where(teacher: @teacher)
   end
 
+  def account_setting
+    @teacher = current_teacher
+  end
+
+  def account_update
+    @teacher = current_teacher
+    if @teacher.update_attributes(account_setting_params)
+      redirect_to root_path
+      flash[:success] = "パスワードが更新されました！<br>新しいパスワードは<b>#{params[:teacher][:password]}</b>です。"
+    else
+      render 'account_setting'
+    end
+  end
   private
 
   def teacher_params
     params.require(:teacher).permit(:name, :code, :department, :status, :image, :password, :password_confirmation)
+  end
+
+  def account_setting_params
+    params.require(:teacher).permit(:password, :password_confirmation)
   end
 
   def set_teacher

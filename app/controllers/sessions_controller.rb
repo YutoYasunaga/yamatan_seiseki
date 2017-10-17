@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
       if teacher && teacher.authenticate(params[:password])
         session[:teacher_id] = teacher.id
         redirect_to root_path
-        flash[:success] = "#{teacher.name}先生としてログインしました！"
+        flash[:success] = "<b>#{teacher.name}先生</b>としてログインしました！"
       else
         redirect_to sign_in_path(role: params[:role])
         flash[:danger] = '教員番号またはパスワードが違います！'
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       if student && student.authenticate(params[:password])
         session[:student_id] = student.id
         redirect_to root_path
-        flash[:success] = "#{student.name}さんとしてログインしました！"
+        flash[:success] = "<b>#{student.name}さん</b>としてログインしました！"
       else
         redirect_to sign_in_path(role: params[:role])
         flash[:danger] = '学籍番号またはパスワードが違います！'

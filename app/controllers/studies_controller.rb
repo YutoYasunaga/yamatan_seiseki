@@ -2,6 +2,13 @@ class StudiesController < ApplicationController
 
   after_action :update_status, only: [:create, :update]
 
+  def index
+    @student = Student.find_by_code(params[:code])
+    @results = Study.where(student_id: @student.id)
+    @basic_results = @results.joins(:subject).where("subjects.division = ?", '基礎').order('section, name')
+    @major_results = @results.joins(:subject).where("subjects.division = ?", '専門').order('section, name')
+  end
+
   def new
     @study = Study.new
   end
@@ -59,6 +66,7 @@ class StudiesController < ApplicationController
       study.update_attributes(status: status)
     end
     redirect_to edit_results_path(name: params[:name])
+    flash[:success] = "成績が更新されました！"
   end
 
   private

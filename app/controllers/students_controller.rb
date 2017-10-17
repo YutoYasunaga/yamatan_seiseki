@@ -32,12 +32,20 @@ class StudentsController < ApplicationController
     end
   end
 
-  def view_result
-    @student = Student.find_by_code(params[:code])
-    @results = Study.where(student_id: @student.id)
-    @basic_results = @results.joins(:subject).where("subjects.division = ?", '基礎').order('section, name')
-    @major_results = @results.joins(:subject).where("subjects.division = ?", '専門').order('section, name')
+  def account_setting
+    @student = current_student
   end
+
+  def account_update
+    @student = current_student
+    if @student.update_attributes(account_setting_params)
+      redirect_to root_path
+      flash[:success] = "パスワードが更新されました！<br>新しいパスワードは<b>#{params[:student][:password]}</b>です。"
+    else
+      render 'account_setting'
+    end
+  end
+
 
   private
 
@@ -47,5 +55,9 @@ class StudentsController < ApplicationController
 
   def student_params
     params.require(:student).permit(:name, :code, :department, :image, :status, :enter_school_year, :password, :password_confirmation)
+  end
+
+  def account_setting_params
+    params.require(:student).permit(:password, :password_confirmation)
   end
 end

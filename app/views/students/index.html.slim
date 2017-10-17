@@ -11,7 +11,7 @@ h1.text-primary
       = f.label :code_cont, '学籍番号'
       = f.search_field :code_cont
       = f.label :department_cont, '学科'
-      = f.select :department_cont, ['情報メディア学科', '児童教育学科', '初等教育学専攻'], include_blank: true
+      = f.select :department_cont, Student::DEPARTMENTS, include_blank: true
       = f.label :enter_school_year_eq, '入学年'
       = f.select :enter_school_year_eq, (1980..(Time.now.year)).to_a.reverse
       = f.label :status_cont, '状況'

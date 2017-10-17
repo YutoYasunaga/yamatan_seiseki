@@ -11,6 +11,8 @@ class Student < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   validates :name, presence: true
+  validates :password, length: { minimum: 6 },
+    if: lambda { new_record? || !password.blank? }
 
   def total_credit
     studies.where("score >= ? ", 50).to_a.sum { |study| study.subject.credit }

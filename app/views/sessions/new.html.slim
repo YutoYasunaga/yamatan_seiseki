@@ -9,8 +9,8 @@
 
 .row
   .col-xs-12.col-sm-6.col-md-4.mx-auto
-    .card
-      h4.card-header = title
+    .card.form-card.bg-light
+      h4.card-header.bg-primary.text-white = title
       .card-body
         = form_tag sign_in_path do
           = hidden_field_tag :role, params[:role]
@@ -23,3 +23,8 @@
           .form-action
             = button_tag type: :submit, class: "btn btn-#{button_type}" do
               = fa_icon('sign-in', text: 'ログイン')
+        hr
+        - if params[:role] == 'teacher'
+          = link_to '学生さんはこちらです', sign_in_path(role: 'student')
+        - else
+          = link_to '先生方はこちらです', sign_in_path(role: 'teacher')

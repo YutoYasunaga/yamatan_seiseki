@@ -1,0 +1,22 @@
+h1.text-primary
+  = fa_icon 'cog', text: 'アカウントを設定'
+
+.row
+  .col-xs-12.col-sm-6.col-md-4.mx-auto
+    .card.form-card
+      h5.card-header パスワードを変更
+      .card-body
+        = form_for @student, url: student_account_update_path, method: :put do |f|
+          ul.errors
+            - if @student.errors.any?
+              - @student.errors.full_messages.each do |message|
+                li = message
+          .form-group
+            = f.label :password, '新しいパスワード（６文字以上）'
+            = f.password_field :password, class: 'form-control'
+          .form-group
+            = f.label :password_confirmation, '新しいパスワード確認'
+            = f.password_field :password_confirmation, class: 'form-control'
+          .form-action
+            = f.button type: :submit, class: 'btn btn-success' do
+              = fa_icon 'key', text: '更新する'

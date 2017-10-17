@@ -61,6 +61,7 @@
             = image_tag 'buttons/student_result.png'
           .card-footer
             b 成績管理
+
     - if Setting.registration_status == 'on'
       .col-xs-12.col-sm-4.col-md-3
         - if current_student.registration.nil?

@@ -11,6 +11,8 @@ class Teacher < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   validates :name, presence: true
+  validates :password, length: { minimum: 6 },
+    if: lambda { new_record? || !password.blank? }
 
   def admin?
     department == '管理'
