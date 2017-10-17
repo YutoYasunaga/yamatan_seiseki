@@ -17,7 +17,7 @@
             = f.collection_select :subject_id, Subject.all, :id, :name, prompt: '選択してください'
         .form-group
           = f.label :status, '状況'
-          = f.select :status, ['受講中', '受講済み'], prompt: '選択してください'
+          = f.select :status, ['受講中', '受講済み', '不可'], prompt: '選択してください'
         .form-group
           = f.label :score, '点数'
           = f.number_field :score, class: 'form-control', step: :any

@@ -1,4 +1,5 @@
 class StudiesController < ApplicationController
+
   after_action :update_status, only: [:create, :update]
 
   def new
@@ -36,9 +37,28 @@ class StudiesController < ApplicationController
     flash[:success] = "「#{@study.subject.name}」の成績が削除されました！"
   end
 
-  def edit_result
+  def edit_results
     @subject = Subject.find_by_name(params[:name])
     @studies = Study.where(subject: @subject, status: '受講中')
+  end
+
+  def update_results
+    @subject = Subject.find_by_name(params[:name])
+    Study.update(params[:study].keys, params[:study].values)
+    @studies = Study.where(subject: @subject, status: '受講中')
+    @studies.each do |study|
+      if study.score
+        if study.score >= 50
+          status = '受講済み'
+        else
+          status = '不可'
+        end
+      else
+        status = '受講中'
+      end
+      study.update_attributes(status: status)
+    end
+    redirect_to edit_results_path(name: params[:name])
   end
 
   private
@@ -48,10 +68,15 @@ class StudiesController < ApplicationController
   end
 
   def update_status
-    if @study.score and @study.score >= 50
-      @study.update_attributes(status: '受講済み')
+    if @study.score
+      if @study.score >= 50
+        status = '受講済み'
+      else
+        status = '不可'
+      end
     else
-      @study.update_attributes(status: nil)
+      status = '受講中'
     end
+    @study.update_attributes(status: status)
   end
 end

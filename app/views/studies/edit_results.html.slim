@@ -1,0 +1,20 @@
+h1.text-primary
+  = fa_icon 'edit', text: "「#{@subject.name}」の成績を編集"
+
+.row
+  .col-md-8.mx-auto
+    = form_for :study, url: update_results_path, method: :put do
+      table.table.table-striped
+        thead
+          th 学籍番号
+          th 名前
+          th 点数
+        tbody
+          - @studies.each do |study|
+            = fields_for "study[]", study do |f|
+              tr
+                td = study.student.code
+                td = study.student.name
+                td = f.number_field :score, class: 'form-control'
+      = button_tag type: :submit,  class: 'btn btn-success'  do
+        span Hello
